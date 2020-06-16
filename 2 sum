@@ -1,0 +1,9 @@
+class Solution(object): 
+    def twoSum(self, nums, target): 
+        array = {}  
+        for i, j in enumerate(nums):
+            match = target - j	
+            if match in array: 
+                return [array[match], i] 	
+            array[j] = i
+        return []
