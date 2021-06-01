@@ -1,0 +1,19 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        HashSet <String> unique = new HashSet(); //first a hashset for storing inputs
+        for (String email : emails) {   //for each loop iterate individual email from given emails
+            int breakpoint = email.indexOf("@");    //break email over @ for local/domain name
+            String localname = email.substring(0, breakpoint); //create and store local & domain name
+            String domainname = email.substring(breakpoint);
+            
+            if (localname.contains("+")){  //check + sign in local name
+                int plus = localname.indexOf("+"); //get + sign position
+                localname = localname.substring(0, plus); //update right local name
+            }
+            localname = localname.replaceAll("\\.", "");  //delete unnecessary dot sign
+            String result = localname + domainname; //concatenate for full email result
+            unique.add(result); //add to original hashset!
+        }
+        return unique.size();
+    }
+}
