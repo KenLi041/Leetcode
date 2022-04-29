@@ -5,8 +5,8 @@ class Solution:
         if nums_len <= 2: #if less than 2 elements directly return
             return nums_len
         pointer_slow = 2 #start slow pointer at 2nd element
-        for pointer_fast in range(2, nums_len): #fast pointer iterate and compare with slow pointer
+        for pointer_fast in range(2, nums_len): #fast pointer iterate and compare with slow pointer for duplicate
             if not ( (nums[pointer_fast] == nums[pointer_slow-1]) and (nums[pointer_fast] == nums[pointer_slow-2]) ):
                 nums[pointer_slow] = nums[pointer_fast]
-                pointer_slow += 1
+                pointer_slow += 1 #move slow pointer to next element if there isn't duplicate
         return pointer_slow
