@@ -1,0 +1,18 @@
+class Solution(object):
+    def insert(self, intervals, newInterval):
+        """
+        :type intervals: List[List[int]]
+        :type newInterval: List[int]
+        :rtype: List[List[int]]
+        """
+        small, big = [], []
+        a, b = newInterval[0], newInterval[1] #get the upper/lower boundary of new interval
+        for i in intervals:
+            if i[1] < a: #intervals里在newinterval下限之下/上限之上的直接放进small/big之后直接和merged一起为结果
+                small += i,#检测下一个interval
+            elif i[0] > b:
+                big += i, #same thing
+            else:
+                a = min(a, i[0]) #然后改interval, newinterval[0]和intervals[0]对比取更小值
+                b = max(b, i[1]) #same logic
+        return small + [[a, b]] + big   #没改的small+big+改的[a, b], 注意ascending顺序所以small, big分开放
