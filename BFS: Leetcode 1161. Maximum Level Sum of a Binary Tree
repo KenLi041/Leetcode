@@ -1,0 +1,31 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def maxLevelSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        #for this question we use BFS for finding shortest path
+        sum, l, answer = float('-inf') , 1, 0 #float('+-inf') is +-infinity, useful for finding lowest/highest value and path cost
+        queue = []
+        queue.append(root) #Declare a queue and insert the starting node
+        
+        while(len(queue)):
+            n, s = len(queue), 0 #get length
+
+            for _ in range(n):
+                temp = queue.pop(0)
+                s += temp.val #add the values of visited nodes
+                if temp.left: queue.append(temp.left) #Mark that node as visited
+                if temp.right: queue.append(temp.right) #Insert all unvisited neighbours of node into the queue
+            if s > sum: 
+                sum = s #update sum
+                answer = l #start with level 1
+            l += 1 #when s > sum means an additional layer
+        
+        return answer
