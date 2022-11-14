@@ -1,0 +1,21 @@
+class Solution(object):
+    def minDeletions(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        #不能有相同frequency的字母, 如ceabaacb要delete 2c or 2b to get eabaab with e frequency 1, b = 2, a = 3
+        answer = 0
+        hashtable = {} #create hashtable
+        for i in s:
+            if i in hashtable: #if a letter scanned is already  in hashtable, increase its freq  uency+1
+                hashtable[i] += 1
+            else:
+                hashtable[i] = 1 #else if a letter not in hashtable, make its frquency value = 1
+        frequencyvalue = set() # checking each letter don't have same frequency
+        for a, b in hashtable.items(): #use .items to return key-value pairs, a is index (letter), b is frequnency count
+            while b > 0 and b in frequencyvalue:
+                b -= 1
+                answer += 1
+            frequencyvalue.add(b) 
+        return answer
